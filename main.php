@@ -17,7 +17,7 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
     case "create":
       if (count($params) >= 5)
       {
-        CreateTimer();
+        CreateTimer($bot, $params);
       }
       else
       {
