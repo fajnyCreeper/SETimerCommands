@@ -280,9 +280,9 @@ class StreamElements
   }
 
   /**
-   * List all timers
-   * @return bool|mixed
-   */
+    * List all timers
+    *  @return bool|mixed
+    */
   public function listTimers()
   {
     $url = 'bot/timers/' . $this->channelId;
@@ -292,9 +292,18 @@ class StreamElements
     return $res;
   }
 
+  /**
+    * Get timer based on provided id
+    * @param string $timerId
+    * @return bool|mixed
+    */
   public function getTimer($timerId)
   {
+    $url = 'bot/timers/' . $this->channelId . '/' . $timerId;
 
+    $res = $this->sendRequest('GET', $url);
+
+    return $res;
   }
 
   /**
@@ -306,6 +315,7 @@ class StreamElements
     * @param int $onlineInt
     * @param bool $offline
     * @param int $onlineInt
+    * @return bool|mixed
     */
   public function createTimer($name, $messages, $chatLines, $online, $onlineInt, $offline, $offlineInt)
   {
@@ -330,13 +340,49 @@ class StreamElements
     return $res;
   }
 
-  public function updateTimer($timerId)
+  /**
+    * Update timer
+    * @param string $timerId
+    * @param string $name
+    * @param array $messages
+    * @param string $chatLines
+    * @param bool $enabled
+    * @param bool $online
+    * @param int $onlineInt
+    * @param bool $offline
+    * @param int $onlineInt
+    * @return bool|mixed
+    */
+  public function updateTimer($timerId, $name, $messages, $chatLines, $enabled, $online, $onlineInt, $offline, $offlineInt)
   {
+    $url = 'bot/timers/' . $this->channelId . '/' . $timerId;
 
+    $timer = array(
+      "online" => array(
+        "enabled" => $online,
+        "interval" => $onlineInt
+      ),
+      "offline" => array(
+        "enabled" => $offline,
+        "interval" => $offlineInt
+      ),
+      "enabled" => $enabled,
+      "chatLines" => $chatLines,
+      "messages" => $messages,
+      "name" => $name
+    );
+
+    $res = $this->sendRequest('PUT', $url, $timer);
+
+    return $res;
   }
 
   public function deleteTimer($timerId)
   {
+    $url = "bot/timers/" . $this->channelId . '/' . $timerId;
 
+    $res = $this->sendRequest('DELETE', $url);
+
+    return $res;
   }
 }
