@@ -330,11 +330,6 @@ class StreamElements
     return $res;
   }
 
-  public function getTimer($timerId)
-  {
-    
-  }
-
   public function updateTimer($timerId)
   {
 
