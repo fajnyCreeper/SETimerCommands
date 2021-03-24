@@ -11,7 +11,8 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
   $bot = new StreamElements($bearer, "Bearer");
   $action = $_GET["action"];
   $params = explode(" ", $_GET["params"]);
-
+  $params = str_replace("_", " ", $params);
+  
   switch ($action)
   {
     case "create":
