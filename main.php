@@ -30,8 +30,11 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
     case "update":
       if (count($params) >= 5)
       {
-        $timer->updateTimer($params);
-        echo "Timer updated.";
+        $res = $timer->updateTimer($params);
+        if ($res === null)
+          echo "Could not find timer called \"".$params[0]."\".";
+        else
+          echo "Timer \"".$params[0]."\" updated.";
       }
       else
         echo "Invalid format. Expected !timer update <Name> <OnlineInterval> <OfflineInterval> <ChatLines> <Message1> ...";
@@ -72,7 +75,7 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
         {
           $res = $timer->toString($params[0]);
           if ($res == "")
-            echo "Could not find timer called \"".$params[0]."\"";
+            echo "Could not find timer called \"".$params[0]."\".";
           else
             echo $res;
         }
