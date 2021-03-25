@@ -89,6 +89,10 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
             echo $res;
         }
         break;
+
+      default:
+        echo "Invalid action! Expected create|update|enable|disable|delete|print";
+        break;
   }
 }
 
