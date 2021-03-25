@@ -377,6 +377,10 @@ class StreamElements
     return $res;
   }
 
+  /**
+    * @param string $timerId
+    * @return bool|mixed
+    */
   public function deleteTimer($timerId)
   {
     $url = "bot/timers/" . $this->channelId . '/' . $timerId;
