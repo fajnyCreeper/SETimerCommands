@@ -1,3 +1,3 @@
 <?php
-$key = "RandomString"; // Random string to distinguish genuie request
+$key = "RandomString"; // Random string to distinguish genuine request
 $bearer = "JWT Token from SE Dashboard";
