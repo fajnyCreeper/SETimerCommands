@@ -69,34 +69,38 @@ class Timer
   public function updateTimer($params)
   {
     $timer = $this->getTimer($params[0]);
-    $timerId = $timer["_id"];
-    $name = $timer["name"];
-    $enabled = $timer["enabled"];
-
-    $online = false;
-    $onlineInt = 1;
-    if ($params[1] != 0)
+    if ($timer !== null)
     {
-      $online = true;
-      $onlineInt = $params[1];
-    }
+      $timerId = $timer["_id"];
+      $name = $timer["name"];
+      $enabled = $timer["enabled"];
 
-    $offline = false;
-    $offlineInt = 1;
-    if ($params[2] != 0)
-    {
-      $offline = true;
-      $offlineInt = $params[2];
-    }
+      $online = false;
+      $onlineInt = 1;
+      if ($params[1] != 0)
+      {
+        $online = true;
+        $onlineInt = $params[1];
+      }
 
-    $chatLines = $params[3];
+      $offline = false;
+      $offlineInt = 1;
+      if ($params[2] != 0)
+      {
+        $offline = true;
+        $offlineInt = $params[2];
+      }
 
-    $messages = array();
-    for ($i = 4; $i < count($params); $i++)
-    {
-      array_push($messages, $params[$i]);
+      $chatLines = $params[3];
+
+      $messages = array();
+      for ($i = 4; $i < count($params); $i++)
+      {
+        array_push($messages, $params[$i]);
+      }
+      return $this->bot->updateTimer($timerId, $name, $messages, $chatLines, $enabled, $online, $onlineInt, $offline, $offlineInt);
     }
-    return $this->bot->updateTimer($timerId, $name, $messages, $chatLines, $enabled, $online, $onlineInt, $offline, $offlineInt);
+    return null;
   }
 
 
