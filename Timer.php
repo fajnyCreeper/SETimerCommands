@@ -137,7 +137,9 @@ class Timer
   {
     $timer = $this->getTimer($timerName);
 
-    return $this->bot->deleteTimer($timer["_id"]);
+    if ($timer !== null)
+      return $this->bot->deleteTimer($timer["_id"]);
+    return null;
   }
 
   /**
