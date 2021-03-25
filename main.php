@@ -65,6 +65,14 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
       }
       else
         echo "Invalid format. Expected !timer delete <Name>";
+        break;
+
+      case "print":
+        if (count($params) >= 1)
+        {
+          echo $timer->toString($params[0]);
+        }
+        break;
   }
 }
 

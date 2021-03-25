@@ -56,7 +56,7 @@ class Timer
 
     foreach ($timers as $key => $timer)
     {
-      if ($timer["name"] == $timerName)
+      if (mb_strtolower($timer["name"]) == mb_strtolower($timerName))
         return $timer;
     }
     return null;
@@ -130,5 +130,25 @@ class Timer
     $timer = $this->getTimer($timerName);
 
     return $this->bot->deleteTimer($timer["_id"]);
+  }
+
+  /**
+    * @param string $timerName
+    * @return string
+    */
+  public function toString($timerName)
+  {
+    $timer = $this->getTimer($timerName);
+
+    if ($timer !== null)
+    {
+      $res = "Timer name: ".$timer["name"]." | Messages: ";
+      foreach ($timer["messages"] as $key => $message)
+      {
+        $res .= $key + 1 .": \"".$message."\" | ";
+      }
+      return $res;
+    }
+    return "";
   }
 }
