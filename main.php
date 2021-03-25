@@ -43,8 +43,11 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
     case "enable":
       if (count($params) >= 1)
       {
-        $timer->toggleTimer($params[0], true);
-        echo "Timer enabled.";
+        $res = $timer->toggleTimer($params[0], true);
+        if ($res === null)
+          echo "Could not find timer called \"".$params[0]."\".";
+        else
+          echo "Timer \"".$params[0]."\" enabled.";
       }
       else
         echo "Invalid format. Expected !timer enable <Name>";
@@ -53,8 +56,11 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
     case "disable":
       if (count($params) >= 1)
       {
-        $timer->toggleTimer($params[0], false);
-        echo "Timer disabled.";
+        $res = $timer->toggleTimer($params[0], false);
+        if ($res === null)
+          echo "Could not find timer called \"".$params[0]."\".";
+        else
+          echo "Timer \"".$params[0]."\" disabled.";
       }
       else
         echo "Invalid format. Expected !timer disable <Name>";
