@@ -112,17 +112,21 @@ class Timer
   public function toggleTimer($timerName, $enabled)
   {
     $timer = $this->getTimer($timerName);
-    return $this->bot->updateTimer(
-      $timer["_id"],
-      $timer["name"],
-      $timer["messages"],
-      $timer["chatLines"],
-      $enabled,
-      $timer["online"]["enabled"],
-      $timer["online"]["interval"],
-      $timer["offline"]["enabled"],
-      $timer["offline"]["interval"]
-    );
+    if ($timer !== null)
+    {
+      return $this->bot->updateTimer(
+        $timer["_id"],
+        $timer["name"],
+        $timer["messages"],
+        $timer["chatLines"],
+        $enabled,
+        $timer["online"]["enabled"],
+        $timer["online"]["interval"],
+        $timer["offline"]["enabled"],
+        $timer["offline"]["interval"]
+      );
+    }
+    return null;
   }
 
   /**
