@@ -70,7 +70,11 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
       case "print":
         if (count($params) >= 1)
         {
-          echo $timer->toString($params[0]);
+          $res = $timer->toString($params[0]);
+          if ($res == "")
+            echo "Could not find timer called \"".$params[0]."\"";
+          else
+            echo $res;
         }
         break;
   }
