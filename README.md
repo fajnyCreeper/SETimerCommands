@@ -16,7 +16,7 @@ Control your timers directly from chat
 ### Adding command to StreamElements
 Create new command, which you can call whatever you want, and as response use code below (with your **own** path and `key` parameter)
 ```
-${customapi.example.com/setimercommands/main.php?key=YourKey&action=${pathescape ${1}}&params=${pathescape${2:|' '}}}
+${customapi.example.com/setimercommands/main.php?key=YourKey&action=${pathescape ${1}}&params=${pathescape ${2:|' '}}}
 ```
 
 ### Calling commands
