@@ -69,8 +69,11 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
     case "delete":
       if (count($params) >= 1)
       {
-        $timer->deleteTimer($params[0]);
-        echo "Timer deleted.";
+        $res = $timer->deleteTimer($params[0]);
+        if ($res === null)
+          echo "Could not find timer called \"".$params[0]."\".";
+        else
+          echo "Timer \"".$params[0]."\" deleted.";
       }
       else
         echo "Invalid format. Expected !timer delete <Name>";
