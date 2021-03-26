@@ -20,8 +20,11 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
     case "create":
       if (count($params) >= 5)
       {
-        $timer->createTimer($params);
-        echo "Timer created.";
+        $res = $timer->createTimer($params);
+        if (array_key_exists("error", $res))
+          echo $res["error"];
+        else
+          echo "Timer \"".$params[0]."\" created.";
       }
       else
         echo "Invalid format. Expected !timer create <Name> <OnlineInterval> <OfflineInterval> <ChatLines> <Message1> ...";

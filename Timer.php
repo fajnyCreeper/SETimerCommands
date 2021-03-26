@@ -43,7 +43,13 @@ class Timer
     {
       array_push($messages, $params[$i]);
     }
-    return $this->bot->createTimer($name, $messages, $chatLines, $online, $onlineInt, $offline, $offlineInt);
+
+    $res = $this->bot->createTimer($name, $messages, $chatLines, $online, $onlineInt, $offline, $offlineInt);
+
+    if (array_key_exists("error", $res))
+      return array("error" => $res["message"]);
+
+    return $res;
   }
 
   /**
