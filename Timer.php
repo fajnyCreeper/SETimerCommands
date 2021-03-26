@@ -161,4 +161,21 @@ class Timer
     }
     return "";
   }
+
+  public function listTimers()
+  {
+    $timers = $this->bot->listTimers();
+    $res = "Listing all timers: ";
+    if ($timers !== null)
+    {
+      foreach ($timers as $timer)
+      {
+        $res .= "\"".$timer["name"]."\" | ";
+      }
+    }
+    else
+      $res = "No timers.";
+
+    return $res;
+  }
 }
