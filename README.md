@@ -33,4 +33,5 @@ If you set online and/or offline interval to zero (*0*), online and/or offline i
 !timer delete <Name>
 !timer print <Name>
 !timer list
+!timer bind <Timer_name> <Command_name>
 ```
