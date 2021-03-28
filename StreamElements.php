@@ -225,60 +225,6 @@ class StreamElements
     return $res;
   }
 
-// CONTEST
-
-  /**
-   * Get list of contests
-   * @return bool|mixed
-   */
-  public function contestsList()
-  {
-    $url = 'contests/' . $this->channelId . '/history?limit=50';
-
-    $res = $this->sendRequest('GET', $url);
-
-    return $res;
-  }
-
-  /**
-   * Creates new contest
-   * @param bool $botResponses
-   * @param string $title
-   * @param int $minBet
-   * @param int $maxBet
-   * @param int $duration
-   * @param array $options
-   * @return bool|mixed
-   */
-  public function contestCreate($botResponses, $title, $minBet, $maxBet, $duration, $options)
-  {
-    /*
-    $options = array(
-      array(
-        'title' => 'Option 1',
-        'command' => 'option_1'
-      ),
-      array(
-       'title' => 'Option 2',
-       'command' => 'option_2'
-      )
-    );
-    */
-    $url = 'contests/' . $this->channelId;
-    $params = array(
-      'botResponses' => $botResponses,
-      'title' => $title,
-      'minBet' => $minBet,
-      'maxBet' => $maxBet,
-      'duration' => $duration,
-      'options' => $options
-    );
-
-    $res = $this->sendRequest('POST', $url, $params);
-
-    return $res;
-  }
-
   /**
     * List all timers
     *  @return bool|mixed
