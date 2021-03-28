@@ -91,6 +91,8 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
           else
             echo $res;
         }
+        else
+          echo "Invalid format. Expected !timer print Timer_name";
         break;
 
       case "list":
