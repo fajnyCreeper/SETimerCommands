@@ -6,6 +6,7 @@ Control your timers directly from chat
 * Fill out your credentials in `config.php`
  * `$key` - Random string to distinguish genuine request
  * `$token` - SE JWT Token that you can find [here](https://streamelements.com/dashboard/account/channels) (After clicking "Show secrets")
+ * `$baseUrl` - Full path to folder (without slash at the end). For example `https://example.com/setimercommands`
 
 ## Usage
 ### URL parameters
