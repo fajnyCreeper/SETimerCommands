@@ -9,7 +9,7 @@ require_once("Timer.php");
 
 if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $key)
 {
-  $timer = new Timer($bearer, "Bearer");
+  $timer = new Timer($bearer, "Bearer", $baseUrl, $key);
 
   $action = $_GET["action"];
   $params = explode(" ", $_GET["params"]);
@@ -99,8 +99,21 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
         echo $timer->listTimers();
         break;
 
+      case "bind":
+        if (count($params) >= 2)
+        {
+          $res = $timer->bindCommand($params[0], $params[1]);
+          if ($res === null)
+            echo "Command or timer with provided name doesn't exist.";
+          else
+            echo "Command binded.";
+        }
+        else
+          echo "Invalid format. Expected !timer bind Timer_name Command_name";
+        break;
+
       default:
-        echo "Invalid action! Expected create|update|enable|disable|delete|print";
+        echo "Invalid action! Expected create|update|enable|disable|delete|print|list|bind";
         break;
   }
 }

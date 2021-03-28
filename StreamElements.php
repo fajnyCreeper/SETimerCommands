@@ -329,9 +329,36 @@ class StreamElements
     */
   public function deleteTimer($timerId)
   {
-    $url = "bot/timers/" . $this->channelId . '/' . $timerId;
+    $url = 'bot/timers/' . $this->channelId . '/' . $timerId;
 
     $res = $this->sendRequest('DELETE', $url);
+
+    return $res;
+  }
+
+
+  /**
+    * @return bool|mixed
+    */
+  public function listCommands()
+  {
+    $url = 'bot/commands/' . $this->channelId;
+
+    $res = $this->sendRequest('GET', $url);
+
+    return $res;
+  }
+
+  /**
+    * @param string $commandId
+    * @return bool|mixed
+    */
+
+  public function getCommand($commandId)
+  {
+    $url = 'bot/commands/' . $this->channelId . '/' . $commandId;
+
+    $res = $this->sendRequest('GET', $url);
 
     return $res;
   }

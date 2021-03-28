@@ -2,14 +2,18 @@
 class Timer
 {
   private $bot;
+  private $baseUrl;
+  private $key;
 
   /**
     * @param string $token
     * @param string $auth
     */
-  public function __construct($token, $auth)
+  public function __construct($token, $auth, $baseUrl, $key)
   {
     $this->bot = new StreamElements($token, $auth);
+    $this->baseUrl = $baseUrl;
+    $this->key = $key;
   }
 
   /**
@@ -168,6 +172,9 @@ class Timer
     return "";
   }
 
+  /**
+    * @return string
+    */
   public function listTimers()
   {
     $timers = $this->bot->listTimers();
@@ -183,5 +190,38 @@ class Timer
       $res = "No timers.";
 
     return $res;
+  }
+
+  public function bindCommand($timerName, $commandName)
+  {
+    $timer = $this->getTimer($timerName);
+    $commandId = null;
+    $commandList = $this->bot->listCommands();
+    foreach ($commandList as $command)
+    {
+      if ($command["command"] == $commandName)
+      {
+        $commandId = $command["_id"];
+        break;
+      }
+    }
+
+    if ($timer !== null && $commandId !== null)
+    {
+      $message = "\${customapi.{$this->baseUrl}/command.php?key={$this->key}&command={$commandId}}";
+      return $this->bot->updateTimer(
+        $timer["_id"],
+        $timer["name"],
+        array($message),
+        $timer["chatLines"],
+        true,
+        $timer["online"]["enabled"],
+        $timer["online"]["interval"],
+        $timer["offline"]["enabled"],
+        $timer["offline"]["interval"]
+      );
+    }
+
+    return null;
   }
 }
