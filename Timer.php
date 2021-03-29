@@ -167,7 +167,7 @@ class Timer
       foreach ($timer["messages"] as $key => $message)
       {
         if (preg_match("/\\\$\{customapi\..*\\/command.php\\?key=.*&command=(.*)\\}/", $message, $matches))
-          $res .= $key + 1 .": Binded to command \"".$this->bot->getCommand($matches[1])["command"]."\"";
+          $res .= $key + 1 .": Bound to command \"".$this->bot->getCommand($matches[1])["command"]."\"";
         else
           $res .= $key + 1 .": \"".$message."\" | ";
       }

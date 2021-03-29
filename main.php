@@ -106,7 +106,7 @@ if (isset($_GET["key"], $_GET["action"], $_GET["params"]) && $_GET["key"] == $ke
           if ($res === null)
             echo "Command or timer with provided name doesn't exist.";
           else
-            echo "Command binded.";
+            echo "Command bound.";
         }
         else
           echo "Invalid format. Expected !timer bind Timer_name Command_name";
